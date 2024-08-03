@@ -37,12 +37,28 @@
         <button type="submit" v-else class="btn btn-primary">Salvar</button>
       </form>
   
-      <div v-if="simulationResults.length">
+      <div v-if="Object.keys(simulationResults).length">
         <h3>Resultados da Simulação:</h3>
-        <div v-for="result in simulationResults" :key="result.id" class="result-block">
-          <p><strong>Instituição:</strong> {{ result.institution }}</p>
-          <p><strong>Valor Solicitado:</strong> {{ result.requestedAmount }}</p>
-          <p><strong>Parcelas:</strong> {{ result.installments }} x <strong>{{ result.installmentValue }}</strong></p>
+        <div v-for="(results, institution) in simulationResults" :key="institution">
+          <h4>{{ institution }}</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Taxa</th>
+                <th>Parcelas</th>
+                <th>Valor da Parcela</th>
+                <th>Convênio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="result in results" :key="result.parcelas + result.convenio">
+                <td>{{ result.taxa }}%</td>
+                <td>{{ result.parcelas }}</td>
+                <td>{{ (result.valor_parcela / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</td>
+                <td>{{ result.convenio }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
