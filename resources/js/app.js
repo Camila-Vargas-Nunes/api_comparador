@@ -3,12 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 
 import App from './components/App.vue';
-import ExampleComponent from './components/ExampleComponent.vue';
+import Simulador from './components/Simulador.vue';
 
 
 const routes = [
-    { path: '/', component: App },
-    { path: '/example', component: ExampleComponent },
+    { path: '/', component: Simulador },
 ];
 
 
